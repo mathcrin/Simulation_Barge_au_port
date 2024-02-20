@@ -19,4 +19,24 @@ public class Demande {
         dateArrivee = json.getInt("dateArrivee");
         nbConteneurs = json.getInt("nbConteneurs");
     }
+
+    public String getOrigine() {
+        return origine;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public Integer getDateDepart() {
+        return dateDepart;
+    }
+
+    public Integer getDateArrivee() {
+        return dateArrivee;
+    }
+
+    public Integer getNbConteneurs() {
+        return nbConteneurs;
+    }
 }

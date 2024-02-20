@@ -16,9 +16,9 @@ public class Sev {
     //private List<Event> events;
     //ou hasmap
     Map<Integer, Objects> events;
-
     List<Demande> demandes;
     List<Service> services;
+
 
     public void loadFromJson() {
         InputStream inputStream = this.getClass().getResourceAsStream("/services.json");
@@ -43,5 +43,6 @@ public class Sev {
             demande.loadFromJson(jsonDemande);
             demandes.add(demande);
         }
+        System.out.println("Chargement des services et des demandes terminé");
     }
 }

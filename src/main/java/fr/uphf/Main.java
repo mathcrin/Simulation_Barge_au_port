@@ -6,7 +6,5 @@ public class Main {
     public static void main(String[] args) {
         Sev sev = new Sev();
         sev.loadFromJson();
-        System.out.println(sev.demandes.toString());
-        System.out.println(sev.services.toString());
     }
 }

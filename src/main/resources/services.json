@@ -1,25 +1,31 @@
 [
   {
     "id": "1",
-    "capactié": 99999,
+    "capacite": 99999,
     "chemin": [
       {
-        "A": "7"
+        "point" : "A",
+        "date" : "7"
       },
       {
-        "A": "8"
+        "point" : "A",
+        "date": "8"
       },
       {
-        "B": "9"
+        "point" : "B",
+        "date": "9"
       },
       {
-        "B": "10"
+        "point" : "B",
+        "date": "10"
       },
       {
-        "C": "11"
+        "point" : "C",
+        "date": "11"
       },
       {
-        "C": "12"
+        "point" : "C",
+        "date": "12"
       }
     ]
   }

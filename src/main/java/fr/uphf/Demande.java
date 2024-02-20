@@ -6,15 +6,17 @@ import java.time.LocalDate;
 
 public class Demande {
     private Integer id;
-    private String Origin;
-    private String Destination;
+    private String origine;
+    private String destination;
     private Integer dateDepart;
     private Integer dateArrivee;
+    private Integer nbConteneurs;
     public void loadFromJson(JSONObject json) {
         id = json.getInt("id");
-        Origin = json.getString("Origin");
-        Destination = json.getString("Destination");
+        origine = json.getString("origine");
+        destination = json.getString("destination");
         dateDepart = json.getInt("dateDepart");
         dateArrivee = json.getInt("dateArrivee");
+        nbConteneurs = json.getInt("nbConteneurs");
     }
 }

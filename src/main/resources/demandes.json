@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "origine": "A",
+    "destination": "B",
+    "dateDepart": "3",
+    "dateArrivee": "13",
+    "nbConteneurs": "7"
+  },
+  {
+    "id": "2",
+    "origine": "B",
+    "destination": "C",
+    "dateDepart": "5",
+    "dateArrivee": "15",
+    "nbConteneurs": "5"
+  },
+  {
+    "id": "3",
+    "origine": "C",
+    "destination": "D",
+    "dateDepart": "7",
+    "dateArrivee": "17",
+    "nbConteneurs": "3"
+  },
+  {
+    "id": "4",
+    "origine": "D",
+    "destination": "E",
+    "dateDepart": "9",
+    "dateArrivee": "19",
+    "nbConteneurs": "2"
+  },
+  {
+    "id": "5",
+    "origine": "E",
+    "destination": "F",
+    "dateDepart": "11",
+    "dateArrivee": "21",
+    "nbConteneurs": "1"
+  }
+]

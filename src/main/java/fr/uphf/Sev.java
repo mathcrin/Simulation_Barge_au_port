@@ -13,11 +13,27 @@ public class Sev {
     //TODO : faire un readme qui explique comment lancer le programme et les modification possible dans le fichier json
     //Simulateur à évenement discret
     //Liste d'évènement discret
-    //private List<Event> events;
-    //ou hasmap
-    Map<Integer, Objects> events;
     List<Demande> demandes;
     List<Service> services;
+
+    public void startSimulation() {
+        //On suppose la liste des demandes triée par date de départ
+        Demande demandeActuel = demandes.get(0);
+        Service service;
+        Integer UniteDeTemps = demandeActuel.getDateDepart();
+        System.out.println("### Début de la simulation ###");
+        while(true){
+            System.out.println("Unite de temps : " + UniteDeTemps);
+            service = Service.unServiceRepondALaDemande(services, demandeActuel);
+            if(service != null) {
+
+            }
+            else {
+                System.out.println("Aucun service ne peut prendre en charge la demande " + demandeActuel.getId());
+
+            }
+        }
+    }
 
 
     public void loadFromJson() {

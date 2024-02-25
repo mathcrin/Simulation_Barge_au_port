@@ -6,5 +6,6 @@ public class Main {
     public static void main(String[] args) {
         Sev sev = new Sev();
         sev.loadFromJson();
+        sev.startSimulation();
     }
 }

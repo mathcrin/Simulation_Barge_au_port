@@ -8,7 +8,7 @@ Commencer lancer le programme :
     mvn clean install exec:java -D exec.mainClass="fr.uphf.Main"
 
 
-Modifications à possible de la simulation :
+Modifications possibles de la simulation :
     -Modifier les services :
         Les services sont représentés par des objets Json dans le fichier src/main/resources/services.json.
         "id" : Représente l'identifiant du service
@@ -23,7 +23,7 @@ Modifications à possible de la simulation :
         "destination": Représente le port de destination de la demande
         "dateDepart": Représente la date de départ maximum de la demande
         "dateArrivee": Représente la date d'arrivée maximum de la demande
-        "nbContainers": Représente le nombre de containers de la demande
+        "nbContainers": Représente le nombre de conteneurs de la demande
 
     -Modifier les ports :
         Les ports sont représenté par une lettre majuscule dans la classe Main.java (sev.ports)

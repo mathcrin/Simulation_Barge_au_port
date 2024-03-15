@@ -11,6 +11,10 @@ public class Demande {
     private Integer dateDepart;
     private Integer dateArrivee;
     private Integer nbConteneurs;
+    private Service service;
+    private  Integer dateReponse = -1;
+    private boolean isResolu = false;
+
     public void loadFromJson(JSONObject json) {
         id = json.getInt("id");
         origine = json.getString("origine");
@@ -38,5 +42,29 @@ public class Demande {
 
     public Integer getNbConteneurs() {
         return nbConteneurs;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public void setDateReponse(Integer integer) {
+        dateReponse = integer;
+    }
+    public Integer getDateResponse() {
+        return dateReponse;
+    }
+    public Object getService() {
+        return service;
+    }
+    public boolean isResolu() {
+        return isResolu;
+    }
+    public void setResolu(boolean resolu) {
+        isResolu = resolu;
     }
 }

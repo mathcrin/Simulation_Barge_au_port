@@ -24,11 +24,11 @@ public class Service {
     }
 
     public static Service unServiceRepondALaDemande(List<Service> services, Demande demande) {
-        //TODO : Changer la mméthode pour trouver le service grâce à la matrice de routage77
+        //TODO : Changer la mméthode pour trouver le service grâce à la matrice de routage
         for(Service service : services) {
             if(service.chemin.containsKey(demande.getOrigine()) && service.chemin.containsKey(demande.getDestination())) {
                 if(service.capacite >= demande.getNbConteneurs()) {
-                    if(service.chemin.get(demande.getDestination()) > demande.getDateArrivee() && service.chemin.get(demande.getOrigine()) > demande.getDateDepart()) {
+                    if(service.chemin.get(demande.getDestination()) >= demande.getDateArrivee() && service.chemin.get(demande.getOrigine()) >= demande.getDateDepart()) {
                         return service;
                     }
                 }
@@ -38,12 +38,17 @@ public class Service {
     }
 
     public static Integer dateDeRepondALaDemande(Service service, Demande demande) {
-        if(service == null) {return null;}
-        else if(demande.getDateArrivee() > service.chemin.get(demande.getDestination()) && demande.getDateDepart() < service.chemin.get(demande.getOrigine())) {
-            return Math.min(demande.getDateArrivee(), service.chemin.get(demande.getDestination()));
+        if(service == null) {return -1;}
+        else if(service.chemin.containsKey(demande.getDestination()) && demande.getDateArrivee() >= service.chemin.get(demande.getDestination()) && demande.getDateDepart() <= service.chemin.get(demande.getOrigine())) {
+            Integer dateReponse = Math.min(demande.getDateArrivee(), service.chemin.get(demande.getDestination()));
+            return dateReponse;
         }
         else {
-            return null;
+            return -1;
         }
+    }
+
+    public int getId() {
+        return id;
     }
 }

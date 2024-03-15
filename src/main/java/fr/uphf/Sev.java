@@ -10,14 +10,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Sev {
-    //TODO : faire un readme qui explique comment lancer le programme et les modification possible dans le fichier json
     //Simulateur à évenement discret
     //Liste d'évènement discret
     List<Demande> demandes;
     List<Service> services;
     List<String> ports;
     int UniteDeTempsMax;
-    List<Integer> TimeLine = new ArrayList<Integer>();
+    List<Integer> TimeLine = new ArrayList<>();
     int[][] routingMatrix ;
 
 
@@ -73,10 +72,10 @@ public class Sev {
         System.out.println("#Pourcentage de demandes résolues : " + Demande.pourcentageDemandesResolues(demandes));
         System.out.println("#Liste des services utilisés : " + Service.servicesUtilises(services));
         System.out.println("#Pourcentae d'occupation des services : " + Service.pourcentageOccupationParService(services));
-        System.out.println("#Nombre de container par port à la fin : " + this.nbContainerParPortFin(services));
+        System.out.println("#Nombre de container par port à la fin : " + this.nbContainerParPortFin());
     }
 
-    private String nbContainerParPortFin(List<Service> services) {
+    private String nbContainerParPortFin() {
         //Affiche le nombre de container par port à la fin de la simulation
         Map<String, Integer> nbContainerParPort = new HashMap<>();
         for(Demande demande : demandes){
@@ -101,36 +100,6 @@ public class Sev {
             }
         }
         return nbContainerParPort.toString();
-    }
-
-    //Réseau espace temps
-    public void retAffichage() {
-        System.out.println("### Affichage du réseau espace temps sous form de grille ###");
-        for(String port : ports) {
-            System.out.print("  " + port + " | "); // Ajout de deux espaces avant le nom du port
-            for(int i = 0; i < UniteDeTempsMax; i++) {
-                if(isServiceAtPortAndTime(port, i)) {
-                    System.out.print(" - ");
-                } else {
-                    System.out.print("   ");
-                }
-            }
-            System.out.println();
-        }
-        System.out.print("   ");
-        for(int i = 0; i < UniteDeTempsMax; i++) {
-            System.out.printf("%3d", i);
-        }
-        System.out.println();
-    }
-
-    private boolean isServiceAtPortAndTime(String port, int time) {
-        for(Service service : services) {
-            if(service.chemin.containsKey(port) && service.chemin.get(port) == time) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void generateRoutingMatrix() {
@@ -174,7 +143,7 @@ public class Sev {
 
     public void loadFromJson() {
         InputStream inputStream = this.getClass().getResourceAsStream("/services.json");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
         String content = reader.lines().collect(Collectors.joining());
         JSONArray jsonServices = new JSONArray(content);
         services = new ArrayList<>();
@@ -185,7 +154,7 @@ public class Sev {
             services.add(service);
         }
         inputStream = this.getClass().getResourceAsStream("/demandes.json");
-        reader = new BufferedReader(new InputStreamReader(inputStream));
+        reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
         content = reader.lines().collect(Collectors.joining());
         JSONArray jsonDemandes = new JSONArray(content);
         demandes = new ArrayList<>();

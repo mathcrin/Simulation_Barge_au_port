@@ -12,7 +12,6 @@ public class Main {
         sev.loadFromJson();
         sev.generateRoutingMatrix();
         sev.afficherMatriceDeRoutage();
-        //sev.retAffichage();
         sev.startSimulation();
     }
 }

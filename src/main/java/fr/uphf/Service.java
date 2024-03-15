@@ -26,7 +26,7 @@ public class Service {
     }
 
     public static Service unServiceRepondALaDemande(List<Service> services, Demande demande) {
-        //TODO : Changer la mméthode pour trouver le service grâce à la matrice de routage
+        //ici nous n'utilisons pas la matrice de routage car elle ne permet pas d'avoir plusieur service qui passe par les même ports mais à des date différentes
         for(Service service : services) {
             if(service.chemin.containsKey(demande.getOrigine()) && service.chemin.containsKey(demande.getDestination())) {
                 if(service.capacite >= demande.getNbConteneurs()) {
@@ -42,8 +42,7 @@ public class Service {
     public static Integer dateDeRepondALaDemande(Service service, Demande demande) {
         if(service == null) {return -1;}
         else if(service.chemin.containsKey(demande.getDestination()) && demande.getDateArrivee() >= service.chemin.get(demande.getDestination()) && demande.getDateDepart() <= service.chemin.get(demande.getOrigine())) {
-            Integer dateReponse = Math.min(demande.getDateArrivee(), service.chemin.get(demande.getDestination()));
-            return dateReponse;
+            return Math.min(demande.getDateArrivee(), service.chemin.get(demande.getDestination()));
         }
         else {
             return -1;
@@ -51,19 +50,19 @@ public class Service {
     }
 
     public static String servicesUtilises(List<Service> services) {
-        String servicesUtilises = "";
+        StringBuilder servicesUtilises = new StringBuilder();
         for(Service service : services) {
-            if(service.isUsed) servicesUtilises += service.getId() + " ";
+            if(service.isUsed) servicesUtilises.append(service.getId()).append(" ");
         }
-        return servicesUtilises;
+        return servicesUtilises.toString();
     }
 
     public static String pourcentageOccupationParService(List<Service> services) {
-        String pourcentageOccupation = "";
+        StringBuilder pourcentageOccupation = new StringBuilder();
         for (Service service : services) {
-            pourcentageOccupation += service.getId() + " : " + (service.occupation * 100 / service.capacite) + "% | ";
+            pourcentageOccupation.append(service.getId()).append(" : ").append(service.occupation * 100 / service.capacite).append("% | ");
         }
-        return pourcentageOccupation;
+        return pourcentageOccupation.toString();
     }
 
     public int getId() {

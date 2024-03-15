@@ -3,6 +3,7 @@ package fr.uphf;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Demande {
     private Integer id;
@@ -22,6 +23,16 @@ public class Demande {
         dateDepart = json.getInt("dateDepart");
         dateArrivee = json.getInt("dateArrivee");
         nbConteneurs = json.getInt("nbConteneurs");
+    }
+
+    public static String pourcentageDemandesResolues(List<Demande> demandes) {
+        int nbDemandesResolues = 0;
+        for(Demande demande : demandes) {
+            if(demande.isResolu()) {
+                nbDemandesResolues++;
+            }
+        }
+        return (nbDemandesResolues * 100 / demandes.size()) + "%";
     }
 
     public String getOrigine() {

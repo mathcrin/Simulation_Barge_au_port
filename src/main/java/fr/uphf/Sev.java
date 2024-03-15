@@ -16,7 +16,7 @@ public class Sev {
     List<Demande> demandes;
     List<Service> services;
     List<String> ports;
-    private final int UniteDeTempsMax = 25;
+    int UniteDeTempsMax;
     List<Integer> TimeLine = new ArrayList<Integer>();
     int[][] routingMatrix ;
 
@@ -41,14 +41,16 @@ public class Sev {
                 if(demande.getDateDepart() == UniteDeTemps) {
                     Service service = Service.unServiceRepondALaDemande(services, demande);
                     if(service != null) {
-                        System.out.println("Départ de la demande " + demande.getId() + ", acceptée par le service " + service.getId());
+                        System.out.println("Départ de la demande " + demande.getId() + ", acceptée par le service " + service.getId() + ", chargement de " + demande.getNbConteneurs() + " conteneurs.");
                         demande.setService(service);
                         demande.setDateReponse(Service.dateDeRepondALaDemande(service, demande));
+                        service.isUsed = true;
+                        service.occupation += demande.getNbConteneurs();
                         //On ajoute la date de résolution de la demande dans la liste des évènements
                         if (!TimeLine.contains(demande.getDateResponse())) TimeLine.add(demande.getDateResponse());
                         Collections.sort(TimeLine);
                     } else {
-                        System.out.println("La demande " + demande.getId() + " est refusée, car aucun service ne peut la satisfaire.");
+                        System.out.println("La demande " + demande.getId() + " est refusée, car aucun service ne peut la satisfaire (soit l'unité de temps max ne le permet pas, soit aucun chemin ne relie les ports origine et destination).");
                     }
                 }
                 if(demande.getDateResponse() == UniteDeTemps && !demande.isResolu()) {
@@ -61,12 +63,44 @@ public class Sev {
         }
         //Affichage des demandes non résolues
         System.out.println("\n### Fin de la simulation ###");
-        System.out.println("### Demandes non résolues ###");
+        System.out.println("### Indicateur clé : ###");
+        System.out.println("#Liste des demandes non résolues :  ");
         for(Demande demande : demandes) {
             if(!demande.isResolu()) {
                 System.out.println("Demande " + demande.getId() + " non résolue");
             }
         }
+        System.out.println("#Pourcentage de demandes résolues : " + Demande.pourcentageDemandesResolues(demandes));
+        System.out.println("#Liste des services utilisés : " + Service.servicesUtilises(services));
+        System.out.println("#Pourcentae d'occupation des services : " + Service.pourcentageOccupationParService(services));
+        System.out.println("#Nombre de container par port à la fin : " + this.nbContainerParPortFin(services));
+    }
+
+    private String nbContainerParPortFin(List<Service> services) {
+        //Affiche le nombre de container par port à la fin de la simulation
+        Map<String, Integer> nbContainerParPort = new HashMap<>();
+        for(Demande demande : demandes){
+            if(demande.isResolu()){
+//                String port = demande.getOrigine();
+//                if(nbContainerParPort.containsKey(port)){
+//                    nbContainerParPort.put(port, nbContainerParPort.get(port) - demande.getNbConteneurs());
+//                }else{
+//                    nbContainerParPort.put(port, -demande.getNbConteneurs());
+//                }
+                String port = demande.getDestination();
+                if(nbContainerParPort.containsKey(port)){
+                    nbContainerParPort.put(port, nbContainerParPort.get(port) + demande.getNbConteneurs());
+                }else{
+                    nbContainerParPort.put(port, demande.getNbConteneurs());
+                }
+            }
+        }
+        for(String port : ports){
+            if(!nbContainerParPort.containsKey(port)){
+                nbContainerParPort.put(port, 0);
+            }
+        }
+        return nbContainerParPort.toString();
     }
 
     //Réseau espace temps
@@ -137,7 +171,6 @@ public class Sev {
             System.out.println();
         }
     }
-
 
     public void loadFromJson() {
         InputStream inputStream = this.getClass().getResourceAsStream("/services.json");

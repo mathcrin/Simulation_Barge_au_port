@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Sev sev = new Sev();
         sev.ports = List.of("A", "B", "C", "D", "E");
+        sev.UniteDeTempsMax = 25;
         sev.loadFromJson();
         sev.generateRoutingMatrix();
         sev.afficherMatriceDeRoutage();

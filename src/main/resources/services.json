@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "capacite": 99999,
+    "capacite": 100,
     "chemin": [
       {
         "point" : "A",
@@ -31,7 +31,7 @@
   },
   {
     "id": "2",
-    "capacite": 99999,
+    "capacite": 100,
     "chemin": [
       {
         "point" : "A",
@@ -45,7 +45,7 @@
   },
   {
     "id": "3",
-    "capacite": 99999,
+    "capacite": 100,
     "chemin": [
       {
         "point" : "B",
@@ -59,7 +59,7 @@
   },
   {
     "id": "4",
-    "capacite": 3,
+    "capacite": 100,
     "chemin": [
       {
         "point" : "C",
@@ -73,7 +73,7 @@
   },
   {
     "id": "5",
-    "capacite": 99999,
+    "capacite": 100,
     "chemin": [
       {
         "point" : "D",
@@ -87,7 +87,7 @@
   },
   {
     "id": "6",
-    "capacite": 99999,
+    "capacite": 100,
     "chemin": [
       {
         "point" : "E",

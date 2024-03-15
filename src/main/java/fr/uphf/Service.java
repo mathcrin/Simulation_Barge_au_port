@@ -11,6 +11,8 @@ public class Service {
     Integer id;
     Integer capacite;
     Map<String,Integer> chemin;
+    Integer occupation = 0;
+    boolean isUsed = false;
 
     public void loadFromJson(JSONObject json) {
         id = json.getInt("id");
@@ -46,6 +48,22 @@ public class Service {
         else {
             return -1;
         }
+    }
+
+    public static String servicesUtilises(List<Service> services) {
+        String servicesUtilises = "";
+        for(Service service : services) {
+            if(service.isUsed) servicesUtilises += service.getId() + " ";
+        }
+        return servicesUtilises;
+    }
+
+    public static String pourcentageOccupationParService(List<Service> services) {
+        String pourcentageOccupation = "";
+        for (Service service : services) {
+            pourcentageOccupation += service.getId() + " : " + (service.occupation * 100 / service.capacite) + "% | ";
+        }
+        return pourcentageOccupation;
     }
 
     public int getId() {

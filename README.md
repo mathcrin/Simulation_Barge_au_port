@@ -30,3 +30,6 @@
 
 ### Modifier le temps maximum de la simulation :
 -Le temps maximum de la simulation est représenté par sev.UniteDeTempsMax dans la classe Main.java
+
+# Notre équipe : 
+__Galfano Nathan__ et __Crinchon Mathis__
